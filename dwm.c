@@ -416,8 +416,8 @@ applyrules(Client *c)
 			c->isfloating = r->isfloating;
 			c->tags |= r->tags;
 			if ((r->tags & SPTAGMASK) && r->isfloating) {
-				c->x = c->mon->wx + (c->mon->ww / 2 - WIDTH(c) / 2);
-				c->y = c->mon->wy + (c->mon->wh / 2 - HEIGHT(c) / 2);
+				c->x = c->mon->wx;
+				c->y = c->mon->wy;
 			}
 			c->alwaysontop = r->alwaysontop;
 			for (m = mons; m && m->num != r->monitor; m = m->next);
@@ -2292,8 +2292,8 @@ showhide(Client *c)
 		return;
 	if (ISVISIBLE(c)) {
 		if ((c->tags & SPTAGMASK) && c->isfloating) {
-			c->x = c->mon->wx + (c->mon->ww / 2 - WIDTH(c) / 2);
-			c->y = c->mon->wy + (c->mon->wh / 2 - HEIGHT(c) / 2);
+			c->x = c->mon->wx;
+			c->y = c->mon->wy;
 		}
 		/* show clients top down */
 		XMoveWindow(dpy, c->win, c->x, c->y);
