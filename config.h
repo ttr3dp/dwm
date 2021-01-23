@@ -1,15 +1,17 @@
 /* See LICENSE file for copyright and license details. */
 #define TERMINAL "st"
+#define TERMCLASS "St"
 
 /* appearance */
 static unsigned int borderpx  = 1;                             /* border pixel of windows */
 static unsigned int snap      = 32;                            /* snap pixel */
+static int swallowfloating    = 0;                             /* 1 means swallow floating windows by default */
 static int showbar            = 1;                             /* 0 means no bar */
 static int topbar             = 1;                             /* 0 means bottom bar */
 static int usealtbar          = 1;                             /* 1 means use non-dwm status bar */
-static const char *altbarclass      = "Polybar";                     /* Alternate bar class name */
-static const char *alttrayname      = "tray";                        /* Polybar tray instance name */
-static const char *altbarcmd        = "dwmpolybar";                  /* Alternate bar launch command */
+static const char *altbarclass      = "Polybar";               /* Alternate bar class name */
+static const char *alttrayname      = "tray";                  /* Polybar tray instance name */
+static const char *altbarcmd        = "dwmpolybar";            /* Alternate bar launch command */
 static const char *fonts[]          = { "monospace:size=10" };
 static const char dmenufont[]       = "monospace:size=10";
 static char normbgcolor[]           = "#222222";
@@ -32,8 +34,10 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Brave",    NULL,       NULL,       2,            0,           -1 },
+	/* class      instance    title           tags mask     isfloating  isterminal  noswallow   monitor */
+	{ "Brave",    NULL,       NULL,           2,            0,          0,          -1,         -1 },
+	{ TERMCLASS,  NULL,       NULL,           0,            0,          1,           0,         -1 },
+	{ NULL,       NULL,       "Event Tester", 0,            0,          0,           1,         -1 }, /* xev */
 };
 
 /* layout(s) */
@@ -79,6 +83,7 @@ ResourcePref resources[] = {
 		{ "nmaster",            INTEGER, &nmaster },
 		{ "resizehints",        INTEGER, &resizehints },
 		{ "mfact",              FLOAT,   &mfact },
+		{ "swallowfloating",    INTEGER, &swallowfloating },
 };
 
 
