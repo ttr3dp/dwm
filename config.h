@@ -2,11 +2,13 @@
 #define TERMINAL "st"
 #define TERMCLASS "St"
 
+#define WTYPE "_NET_WM_WINDOW_TYPE_"
 /* appearance */
 static unsigned int borderpx  = 1;                             /* border pixel of windows */
 static unsigned int gappx     = 6;                             /* gaps between windows */
 static unsigned int snap      = 32;                            /* snap pixel */
 static int swallowfloating    = 0;                             /* 1 means swallow floating windows by default */
+static const int focusedontop       = 1;        /* 1 means focused client is shown on top of floating windows */
 static int showbar            = 1;                             /* 0 means no bar */
 static int topbar             = 1;                             /* 0 means bottom bar */
 static int usealtbar          = 1;                             /* 1 means use non-dwm status bar */
@@ -34,11 +36,16 @@ static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
+	 *	_NET_WM_WINDOW_TYPE(ATOM) = wintype
 	 */
-	/* class      instance    title           tags mask     isfloating  isterminal  noswallow   monitor */
-	{ "Brave",    NULL,       NULL,           2,            0,          0,          -1,         -1 },
-	{ TERMCLASS,  NULL,       NULL,           0,            0,          1,           0,         -1 },
-	{ NULL,       NULL,       "Event Tester", 0,            0,          0,           1,         -1 }, /* xev */
+	/* class       role   instance    title           wintype           tags mask  isfloating  isterminal  noswallow  alwaysontop monitor */
+	{ NULL,        NULL,  NULL,       NULL,           WTYPE "DIALOG",   0,         1,          0,         -1,         1           -1 },
+	{ NULL,        NULL,  NULL,       NULL,           WTYPE "UTILITY",  0,         1,          0,         -1,         1           -1 },
+	{ NULL,        NULL,  NULL,       NULL,           WTYPE "TOOLBAR",  0,         1,          0,         -1,         1           -1 },
+	{ NULL,        NULL,  NULL,       NULL,           WTYPE "SPLASH",   0,         1,          0,         -1,         1           -1 },
+	{ "Brave",     NULL,  NULL,       NULL,           NULL,             2,         0,          0,         -1,         0           -1 },
+	{ TERMCLASS,   NULL,  NULL,       NULL,           NULL,             0,         0,          1,          0,         0           -1 },
+	{ NULL,        NULL,  NULL,       "Event Tester", NULL,             0,         0,          0,          1,         1           -1 }, /* xev */
 };
 
 /* layout(s) */
