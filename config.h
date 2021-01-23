@@ -4,6 +4,7 @@
 
 /* appearance */
 static unsigned int borderpx  = 1;                             /* border pixel of windows */
+static unsigned int gappx     = 6;                             /* gaps between windows */
 static unsigned int snap      = 32;                            /* snap pixel */
 static int swallowfloating    = 0;                             /* 1 means swallow floating windows by default */
 static int showbar            = 1;                             /* 0 means no bar */
@@ -84,6 +85,7 @@ ResourcePref resources[] = {
 		{ "resizehints",        INTEGER, &resizehints },
 		{ "mfact",              FLOAT,   &mfact },
 		{ "swallowfloating",    INTEGER, &swallowfloating },
+		{ "gappx",              INTEGER, &gappx },
 };
 
 
