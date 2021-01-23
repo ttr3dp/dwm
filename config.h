@@ -73,6 +73,7 @@ static int resizehints = 1;    /* 1 means respect size hints in tiled resizals *
 
 
 #include "tatami.c"
+#include "gaplessgrid.c"
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]=",      tile },    /* first entry is default */
@@ -83,6 +84,7 @@ static const Layout layouts[] = {
 	{ "|M|",      centeredmaster },
 	{ ">M>",      centeredfloatingmaster },
 	{ "|+|",      tatami },
+	{ "###",      gaplessgrid },
 	{ NULL,       NULL },
 };
 
@@ -150,6 +152,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_o,      setlayout,      {.v = &layouts[5]} },
 	{ MODKEY|ShiftMask,             XK_o,      setlayout,      {.v = &layouts[6]} },
 	{ MODKEY|ShiftMask,             XK_t,      setlayout,      {.v = &layouts[7]} },
+	{ MODKEY,                       XK_g,      setlayout,      {.v = &layouts[8]} },
 	{ MODKEY|ControlMask,           XK_comma,  cyclelayout,    {.i = -1 } },
 	{ MODKEY|ControlMask,           XK_period, cyclelayout,    {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
