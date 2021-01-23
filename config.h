@@ -32,8 +32,7 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Brave",    NULL,       NULL,       2,            0,           -1 },
 };
 
 /* layout(s) */
@@ -63,6 +62,8 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { TERMINAL, NULL };
+
+#include <X11/XF86keysym.h>
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -99,6 +100,15 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_BackSpace,      quit,           {0} },
+	/* ---------------------------------- CUSTOM --------------------------------------- */
+	{ MODKEY|ShiftMask,             XK_x,                spawn,                 SHCMD("slock") },
+	{ 0, XK_Print,                  spawn,               SHCMD("maim -s $XDG_DESKTOP_DIR/Screenshot-$(date +%s).png && notify-send \\\"Screenshot taken!\\\"") },
+	{ 0, XF86XK_AudioRaiseVolume,   spawn,               SHCMD("pulsemixer --change-volume +5 && pkill -RTMIN+6 dwmblocks") },
+	{ 0, XF86XK_AudioLowerVolume,   spawn,               SHCMD("pulsemixer --change-volume -5 && pkill -RTMIN+6 dwmblocks") },
+	{ 0, XF86XK_AudioPlay,          spawn,               SHCMD("cmus-remote -u") },
+	{ 0, XF86XK_AudioStop,          spawn,               SHCMD("cmus-remote -s") },
+	{ 0, XF86XK_AudioNext,          spawn,               SHCMD("cmus-remote -n") },
+	{ 0, XF86XK_AudioPrev,          spawn,               SHCMD("cmus-remote -r") },
 };
 
 /* button definitions */
