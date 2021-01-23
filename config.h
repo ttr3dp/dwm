@@ -30,6 +30,20 @@ static char *colors[][3] = {
        [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
 };
 
+
+typedef struct {
+	const char *name;
+	const void *cmd;
+} Sp;
+
+const char *spcmd1[] = {TERMINAL, "-n", "spterm", "-g", "120x34", NULL };
+const char *spcmd2[] = {TERMINAL, "-n", "spcalc", "-f", "monospace:size=16", "-g", "50x20", "-e", "bc", "-lq", NULL };
+static Sp scratchpads[] = {
+	/* name          cmd  */
+	{"spterm",      spcmd1},
+	{"spcalc",      spcmd2},
+};
+
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
@@ -47,7 +61,9 @@ static const Rule rules[] = {
 	{ NULL,        "browser", NULL,       NULL,           NULL,             2,         0,          0,         -1,         0           -1 },
 	{ TERMCLASS,   NULL,      NULL,       NULL,           NULL,             0,         0,          1,          0,         0           -1 },
 	{ NULL,        NULL,      NULL,       "Event Tester", NULL,             0,         0,          0,          1,         1           -1 }, /* xev */
-	{ NULL,       "pop-up",   NULL,       NULL,           NULL,             0,         1,          0,         -1,         1,          -1 }
+	{ NULL,       "pop-up",   NULL,       NULL,           NULL,             0,         1,          0,         -1,         1,          -1 },
+	{ NULL,        NULL,      "spterm",   NULL,           NULL,             SPTAG(0),  1,          1,          0,         1,          -1 },
+	{ NULL,        NULL,      "spcalc",   NULL,           NULL,             SPTAG(1),  1,          1,          0,         1,          -1 },
 };
 
 /* layout(s) */
@@ -107,6 +123,7 @@ ResourcePref resources[] = {
 
 #include <X11/XF86keysym.h>
 
+
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
@@ -118,7 +135,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
+	{ MODKEY|ShiftMask,             XK_z,      zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
@@ -168,7 +185,10 @@ static Key keys[] = {
 	{ MODKEY|ControlMask|ShiftMask, XK_Down,   moveresizeedge, {.v = "B"} },
 	{ MODKEY|ControlMask|ShiftMask, XK_Left,   moveresizeedge, {.v = "L"} },
 	{ MODKEY|ControlMask|ShiftMask, XK_Right,  moveresizeedge, {.v = "R"} },
-	/* ---------------------------------- CUSTOM --------------------------------------- */
+	/* ---------------------------- SCRATCHPADS ------------------------------------ */
+	{ MODKEY|ShiftMask,             XK_Return, togglescratch,  {.ui = 0 } },
+	{ MODKEY,                       XK_F12,    togglescratch,  {.ui = 1 } },
+	/* -------------------------------- CUSTOM ------------------------------------- */
 	{ MODKEY|ShiftMask,             XK_x,                spawn,                 SHCMD("slock") },
 	{ 0, XK_Print,                  spawn,               SHCMD("maim -s $XDG_DESKTOP_DIR/Screenshot-$(date +%s).png && notify-send \\\"Screenshot taken!\\\"") },
 	{ 0, XF86XK_AudioRaiseVolume,   spawn,               SHCMD("pulsemixer --change-volume +5 && pkill -RTMIN+6 dwmblocks") },
@@ -177,6 +197,8 @@ static Key keys[] = {
 	{ 0, XF86XK_AudioStop,          spawn,               SHCMD("cmus-remote -s") },
 	{ 0, XF86XK_AudioNext,          spawn,               SHCMD("cmus-remote -n") },
 	{ 0, XF86XK_AudioPrev,          spawn,               SHCMD("cmus-remote -r") },
+	{ MODKEY, XK_grave,             spawn,               SHCMD("emoji") },
+	{ MODKEY|ControlMask, XK_p,     spawn,               SHCMD("passmenu") },
 };
 
 /* button definitions */
@@ -189,7 +211,7 @@ static Button buttons[] = {
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
-	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
+	{ ClkClientWin,         MODKEY,         Button1,        resizemouse,    {0} },
 	{ ClkTagBar,            0,              Button1,        view,           {0} },
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
