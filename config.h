@@ -38,14 +38,15 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 *	_NET_WM_WINDOW_TYPE(ATOM) = wintype
 	 */
-	/* class       role   instance    title           wintype           tags mask  isfloating  isterminal  noswallow  alwaysontop monitor */
-	{ NULL,        NULL,  NULL,       NULL,           WTYPE "DIALOG",   0,         1,          0,         -1,         1           -1 },
-	{ NULL,        NULL,  NULL,       NULL,           WTYPE "UTILITY",  0,         1,          0,         -1,         1           -1 },
-	{ NULL,        NULL,  NULL,       NULL,           WTYPE "TOOLBAR",  0,         1,          0,         -1,         1           -1 },
-	{ NULL,        NULL,  NULL,       NULL,           WTYPE "SPLASH",   0,         1,          0,         -1,         1           -1 },
-	{ "Brave",     NULL,  NULL,       NULL,           NULL,             2,         0,          0,         -1,         0           -1 },
-	{ TERMCLASS,   NULL,  NULL,       NULL,           NULL,             0,         0,          1,          0,         0           -1 },
-	{ NULL,        NULL,  NULL,       "Event Tester", NULL,             0,         0,          0,          1,         1           -1 }, /* xev */
+	/* class       role       instance    title           wintype           tags mask  isfloating  isterminal  noswallow  alwaysontop monitor */
+	{ NULL,        NULL,      NULL,       NULL,           WTYPE "DIALOG",   0,         1,          0,         -1,         1           -1 },
+	{ NULL,        NULL,      NULL,       NULL,           WTYPE "UTILITY",  0,         1,          0,         -1,         1           -1 },
+	{ NULL,        NULL,      NULL,       NULL,           WTYPE "TOOLBAR",  0,         1,          0,         -1,         1           -1 },
+	{ NULL,        NULL,      NULL,       NULL,           WTYPE "SPLASH",   0,         1,          0,         -1,         1           -1 },
+	{ NULL,        "browser", NULL,       NULL,           NULL,             2,         0,          0,         -1,         0           -1 },
+	{ TERMCLASS,   NULL,      NULL,       NULL,           NULL,             0,         0,          1,          0,         0           -1 },
+	{ NULL,        NULL,      NULL,       "Event Tester", NULL,             0,         0,          0,          1,         1           -1 }, /* xev */
+	{ NULL,       "pop-up",   NULL,       NULL,           NULL,             0,         1,          0,         -1,         1,          -1 }
 };
 
 /* layout(s) */
