@@ -100,6 +100,8 @@ ResourcePref resources[] = {
 		{ "mfact",              FLOAT,   &mfact },
 		{ "swallowfloating",    INTEGER, &swallowfloating },
 		{ "gappx",              INTEGER, &gappx },
+		{ "focusedontop",       INTEGER, &focusedontop },
+		{ "focusonwheel",       INTEGER, &focusonwheel },
 };
 
 
