@@ -200,7 +200,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Return, togglescratch,  {.ui = 0 } },
 	{ MODKEY,                       XK_F12,    togglescratch,  {.ui = 1 } },
 	/* -------------------------------- CUSTOM ------------------------------------- */
-	{ MODKEY|ShiftMask,             XK_x,                spawn,                 SHCMD("slock") },
+	{ MODKEY|ShiftMask,             XK_x,                spawn,                 SHCMD("lockscreen") },
 	{ 0, XK_Print,                  spawn,               SHCMD("maim -s $XDG_DESKTOP_DIR/Screenshot-$(date +%s).png && notify-send \\\"Screenshot taken!\\\"") },
 	{ 0, XF86XK_AudioRaiseVolume,   spawn,               SHCMD("pulsemixer --change-volume +5 && pkill -RTMIN+6 dwmblocks") },
 	{ 0, XF86XK_AudioLowerVolume,   spawn,               SHCMD("pulsemixer --change-volume -5 && pkill -RTMIN+6 dwmblocks") },
