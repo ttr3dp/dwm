@@ -13,7 +13,7 @@ static int topbar             = 1;                             /* 0 means bottom
 static int usealtbar          = 1;                             /* 1 means use non-dwm status bar */
 static const char *altbarclass      = "Polybar";               /* Alternate bar class name */
 static const char *alttrayname      = "tray";                  /* Polybar tray instance name */
-static const char *altbarcmd        = "dwmpolybar";            /* Alternate bar launch command */
+static const char *altbarcmd        = "dwmaltbar";            /* Alternate bar launch command */
 static const char *fonts[]          = { "monospace:size=10" };
 static const char dmenufont[]       = "monospace:size=10";
 static char normbgcolor[]           = "#222222";
