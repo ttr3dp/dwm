@@ -34,6 +34,7 @@ static const Rule rules[] = {
 	/* class      instance    title           tags mask  isfloating  isterminal  noswallow  monitor */
 	{ "Brave",    NULL,       NULL,           2,         0,          0,         -1,         -1 },
 	{ TERMCLASS,  NULL,       NULL,           0,         0,          1,          0,         -1 },
+	{ "Notes",    NULL,       NULL,           0,         1,          1,          0,         -1 },
 	{ NULL,       NULL,       "Event Tester", 0,         0,          0,          1,         -1 }, /* xev */
 };
 
@@ -138,6 +139,8 @@ static Key keys[] = {
 	{ 0, XF86XK_AudioPrev,          spawn,               SHCMD("cmus-remote -r") },
 	{ MODKEY, XK_grave,             spawn,               SHCMD("emoji") },
 	{ MODKEY|ControlMask, XK_p,     spawn,               SHCMD("passmenu") },
+	{ MODKEY|ShiftMask,   XK_p,     spawn,               SHCMD("ytpd") },
+	{ MODKEY,             XK_n,     spawn,               SHCMD("note") },
 };
 
 /* button definitions */
