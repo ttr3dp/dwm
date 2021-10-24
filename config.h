@@ -67,9 +67,10 @@ static const Rule rules[] = {
 	 */
 	/* class         instance    title           tags mask  isfloating  isterminal  noswallow  monitor */
 	{ "Brave",       NULL,       NULL,           2,         0,          0,         -1,          1 },
+	{ "LibreWolf",   NULL,       NULL,           2,         0,          0,         -1,          1 },
 	{ NULL,          NULL,       "Mullvad VPN",  1 << 7,    0,          0,         -1,         -1 },
 	{ "Cmus",        NULL,       NULL,           1 << 8,    0,          0,         -1,         -1 },
-	{ "St",          NULL,       NULL,           0,         0,          1,          0,         -1 },
+	{ "Alacritty",   NULL,       NULL,           0,         0,          1,          0,         -1 },
 	{ NULL,          NULL,       "Event Tester", 0,         0,          0,          1,         -1 }, /* xev */
 };
 
@@ -100,7 +101,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmrun", NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "alacritty", NULL };
 
 /*
  * Xresources preferences to load at startup
