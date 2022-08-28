@@ -23,6 +23,41 @@ static char *colors[][3] = {
        [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
  };
 
+static char termcol0[] = "#000000"; /* black   */
+static char termcol1[] = "#ff0000"; /* red     */
+static char termcol2[] = "#33ff00"; /* green   */
+static char termcol3[] = "#ff0099"; /* yellow  */
+static char termcol4[] = "#0066ff"; /* blue    */
+static char termcol5[] = "#cc00ff"; /* magenta */
+static char termcol6[] = "#00ffff"; /* cyan    */
+static char termcol7[] = "#d0d0d0"; /* white   */
+static char termcol8[]  = "#808080"; /* black   */
+static char termcol9[]  = "#ff0000"; /* red     */
+static char termcol10[] = "#33ff00"; /* green   */
+static char termcol11[] = "#ff0099"; /* yellow  */
+static char termcol12[] = "#0066ff"; /* blue    */
+static char termcol13[] = "#cc00ff"; /* magenta */
+static char termcol14[] = "#00ffff"; /* cyan    */
+static char termcol15[] = "#ffffff"; /* white   */
+static char *termcolor[] = {
+  termcol0,
+  termcol1,
+  termcol2,
+  termcol3,
+  termcol4,
+  termcol5,
+  termcol6,
+  termcol7,
+  termcol8,
+  termcol9,
+  termcol10,
+  termcol11,
+  termcol12,
+  termcol13,
+  termcol14,
+  termcol15,
+};
+
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
@@ -89,7 +124,23 @@ ResourcePref resources[] = {
 		{ "mfact",              FLOAT,   &mfact },
 		{ "gappx",              INTEGER, &gappx },
 		{ "swallowfloating",    INTEGER, &swallowfloating },
-		{ "lockfullscreen",    INTEGER, &lockfullscreen },
+		{ "lockfullscreen",     INTEGER, &lockfullscreen },
+		{ "color0",             STRING,  &termcol0 },
+		{ "color1",             STRING,  &termcol1 },
+		{ "color2",             STRING,  &termcol2 },
+		{ "color3",             STRING,  &termcol3 },
+		{ "color4",             STRING,  &termcol4 },
+		{ "color5",             STRING,  &termcol5 },
+		{ "color6",             STRING,  &termcol6 },
+		{ "color7",             STRING,  &termcol7 },
+		{ "color8",             STRING,  &termcol8 },
+		{ "color9",             STRING,  &termcol9 },
+		{ "color10",            STRING,  &termcol10 },
+		{ "color11",            STRING,  &termcol11 },
+		{ "color12",            STRING,  &termcol12 },
+		{ "color13",            STRING,  &termcol13 },
+		{ "color14",            STRING,  &termcol14 },
+		{ "color15",            STRING,  &termcol15 },
 };
 
  #include <X11/XF86keysym.h>
@@ -137,6 +188,8 @@ static const Key keys[] = {
 	/* -------------------------------- CUSTOM ------------------------------------- */
 	{ MODKEY|ShiftMask,   XK_x,     spawn,     SHCMD("lockscreen") },
 	{ 0, XK_Print,                  spawn,     SHCMD("maim -s $XDG_DESKTOP_DIR/Screenshot-$(date +%s).png && notify-send \\\"Screenshot taken!\\\"") },
+	{ 0, XF86XK_MonBrightnessUp,    spawn,     SHCMD("bright +10") },
+	{ 0, XF86XK_MonBrightnessDown,  spawn,     SHCMD("bright -10") },
 	{ 0, XF86XK_AudioRaiseVolume,   spawn,     SHCMD("vol +5") },
 	{ 0, XF86XK_AudioLowerVolume,   spawn,     SHCMD("vol -5") },
 	{ 0, XF86XK_AudioPlay,          spawn,     SHCMD("cmus-remote -u") },
