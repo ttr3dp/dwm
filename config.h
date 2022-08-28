@@ -1,23 +1,23 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int gappx     = 20;       /* gaps between windows */
-static const unsigned int snap      = 32;       /* snap pixel */
-static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
-static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 1;        /* 0 means bottom bar */
-static const int focusonwheel       = 0;
-static const char font[]            = "monospace:pixelsize=12";
-static const char dmenufont[]       = "monospace:pixelsize=14";
+static unsigned int borderpx  = 1;        /* border pixel of windows */
+static unsigned int gappx     = 20;       /* gaps between windows */
+static unsigned int snap      = 32;       /* snap pixel */
+static int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
+static int showbar            = 1;        /* 0 means no bar */
+static int topbar             = 1;        /* 0 means bottom bar */
+static int focusonwheel       = 0;
+static char font[]            = "monospace:pixelsize=12";
+static char dmenufont[]       = "monospace:pixelsize=14";
 static const char *fonts[]          = { font };
-static const char normbgcolor[]     = "#222222";
-static const char normbordercolor[] = "#444444";
-static const char normfgcolor[]     = "#bbbbbb";
-static const char selfgcolor[]      = "#eeeeee";
-static const char selbordercolor[]  = "#005577";
-static const char selbgcolor[]      = "#005577";
-static const char *colors[][3] = {
+static char normbgcolor[]     = "#222222";
+static char normbordercolor[] = "#444444";
+static char normfgcolor[]     = "#bbbbbb";
+static char selfgcolor[]      = "#eeeeee";
+static char selbordercolor[]  = "#005577";
+static char selbgcolor[]      = "#005577";
+static char *colors[][3] = {
        /*               fg           bg           border   */
        [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
        [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
@@ -40,10 +40,10 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static const float mfact     = 0.50; /* factor of master area size [0.05..0.95] */
-static const int nmaster     = 1;    /* number of clients in master area */
-static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
-static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
+static float mfact     = 0.50; /* factor of master area size [0.05..0.95] */
+static int nmaster     = 1;    /* number of clients in master area */
+static int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
+static int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
@@ -68,9 +68,33 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmrun", NULL };
 static const char *termcmd[]  = { "st", NULL };
 
-#include <X11/XF86keysym.h>
+ /*
+ * Xresources preferences to load at startup
+ */
+ResourcePref resources[] = {
+		{ "font",               STRING,  &font },
+		{ "dmenufont",          STRING,  &dmenufont },
+		{ "normbgcolor",        STRING,  &normbgcolor },
+		{ "normbordercolor",    STRING,  &normbordercolor },
+		{ "normfgcolor",        STRING,  &normfgcolor },
+		{ "selbgcolor",         STRING,  &selbgcolor },
+		{ "selbordercolor",     STRING,  &selbordercolor },
+		{ "selfgcolor",         STRING,  &selfgcolor },
+		{ "borderpx",           INTEGER, &borderpx },
+		{ "snap",               INTEGER, &snap },
+		{ "showbar",            INTEGER, &showbar },
+		{ "topbar",             INTEGER, &topbar },
+		{ "nmaster",            INTEGER, &nmaster },
+		{ "resizehints",        INTEGER, &resizehints },
+		{ "mfact",              FLOAT,   &mfact },
+		{ "gappx",              INTEGER, &gappx },
+		{ "swallowfloating",    INTEGER, &swallowfloating },
+		{ "lockfullscreen",    INTEGER, &lockfullscreen },
+};
 
-#include "movestack.c"
+ #include <X11/XF86keysym.h>
+
+ #include "movestack.c"
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
