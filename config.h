@@ -32,7 +32,7 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class         instance    title           tags mask  isfloating  isterminal  noswallow  monitor */
-	{ "Brave",       NULL,       NULL,           2,         0,          0,         -1,          1 },
+	{ NULL,          NULL,       "LibreWolf",           2,         0,          0,         -1,          1 },
 	{ NULL,          NULL,       "Mullvad VPN",  1 << 7,    0,          0,         -1,         -1 },
 	{ "Cmus",        NULL,       NULL,           1 << 8,    0,          0,         -1,         -1 },
 	{ "St",   NULL,       NULL,           0,         0,          1,          0,         -1 },
